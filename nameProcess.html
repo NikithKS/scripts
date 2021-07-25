@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: darkgray;
+            height: 100%;
+            width: 100%;
+        }
+
+        .inputTab {
+            height: 100px;
+            width: 100%;
+            max-width: 720px;
+            margin: 5px 0x 5px 5px;
+            background-color: rgb(143, 181, 214)
+        }
+
+        .a-block {
+            padding: 2%;
+            display: flex;
+            max-width: 100%;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+            overflow-x: hidden;
+        }
+
+        .a-block label {
+            color: chartreuse;
+            font-size: x-large;
+        }
+
+        .copy-btn {
+            font-size: large;
+            background-color: dodgerblue;
+            padding: 5px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a-block">
+        <label for="mainInput">String:</label>
+        <input type="text" id="mainInput" class="inputTab" onkeyup="stringToCamel()">
+        <button id="mainCopy" class="copy-btn" onclick="copyMain()">Copy</button>
+    </div>
+
+    <div class="a-block">
+        <label for="camelInput">Camel:</label>
+        <input type="text" id="camelInput" class="inputTab" onkeyup="camelToLogger()">
+        <button id="mainCopy" class="copy-btn" onclick="copyCamel()">Copy</button>
+    </div>
+
+    <div class="a-block">
+        <label for="loggerInput">Logger:</label>
+        <input type="text" id="loggerInput" class="inputTab">
+        <button id="mainCopy" class="copy-btn" onclick="copyLog()">Copy</button>
+    </div>
+</body>
+<script>
+    function camelToLogger() {
+        let ele = document.getElementById("camelInput");
+        let s = ele.value;
+        let str = 'Verified';
+        for (let i = 6; i < s.length; i++) {
+            if (s[i] === s[i].toUpperCase()) {
+                str += " ";
+            }
+            str += s[i].toLowerCase();
+        }
+        str += '.';
+        ele = document.getElementById("loggerInput");
+        ele.value = str;
+    }
+
+    function stringToCamel() {
+        let ele = document.getElementById("mainInput");
+        let s = ele.value;
+        let str = '';
+        let caps = false;
+        let letter;
+        for (let i = 0; i < s.length; i++) {
+            letter = s[i].toLowerCase();
+            if (letter == ' ') {
+                letter = '';
+                caps = true;
+            }
+            else if (caps) {
+                letter = letter.toUpperCase();
+                caps = false;
+            }
+            str += letter;
+        }
+
+        ele = document.getElementById("camelInput");
+        ele.value = str;
+        stringToLogger(s);
+    }
+
+    function stringToLogger(s) {
+        let str = 'Verified';
+        str += s.slice(6) + '.';
+        ele = document.getElementById("loggerInput");
+        ele.value = str;
+    }
+
+    function copyContent(content) {
+        content.select();
+        document.execCommand("copy");
+    }
+
+    function copyMain() {
+        let content = document.getElementById("mainInput");
+        copyContent(content);
+    }
+
+    function copyCamel() {
+        let content = document.getElementById("camelInput");
+        copyContent(content);
+    }
+
+    function copyLog() {
+        let content = document.getElementById("loggerInput");
+        copyContent(content);
+    }
+</script>
+
+</html>
