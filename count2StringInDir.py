@@ -1,6 +1,8 @@
 import os
 
 # Count 2 strings inside all files inside directory
+# And check if they are equal
+
 PATH = ''
 ext = ''
 str1 = ''
