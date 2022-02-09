@@ -1,6 +1,8 @@
 import os
 
 # search for a string inside all files inside directory
+# searchStringInDir.py
+
 PATH = ''
 ext = ''
 requiredString = ''
@@ -25,9 +27,13 @@ def scanDir(dir, ext):
 
 
 sf, files = scanDir(PATH, ext)
+count = 0
 for path in files:
     with open(path, 'r') as file:
         data = file.read().replace('\n', '')
 
-    if requiredString not in data:
+    if requiredString in data:
         print(path.split('/')[-1])
+        count += 1
+
+print("Total: " + str(count))
